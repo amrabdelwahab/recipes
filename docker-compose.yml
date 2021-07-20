@@ -1,0 +1,16 @@
+version: "3.7"
+services:
+  web:
+    build:
+      context: ./docker
+      target: dev
+    stdin_open: true
+    tty: true
+    command: ./bin/start_dev_server.sh
+    volumes:
+      - ".:/recipes"
+      - bundle:/bundle
+    ports:
+      - "3000:3000"
+volumes:
+  bundle:

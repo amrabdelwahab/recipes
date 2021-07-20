@@ -1,0 +1,8 @@
+FROM ruby:3.0.2-alpine3.14 AS dev
+COPY .build-deps /
+RUN cat .build-deps | xargs apk add
+WORKDIR /recipes
+ENV BUNDLE_PATH=/bundle \
+    BUNDLE_BIN=/bundle/bin \
+    GEM_HOME=/bundle
+ENV PATH="${BUNDLE_BIN}:${PATH}"
