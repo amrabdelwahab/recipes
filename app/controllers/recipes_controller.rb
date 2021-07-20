@@ -2,6 +2,6 @@
 
 class RecipesController < ApplicationController
   def index
-
+    @recipes = RecipesLister.call
   end
 end
