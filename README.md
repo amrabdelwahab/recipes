@@ -11,13 +11,14 @@ This repository implements the solution to the challenge [described here](https:
 * Clone the repository
 * From your terminal run `make setup` to setup everything
     - You need to be logged in to dockerhub, use `docker login` if not
+    - Create the `/config/master.key` (ask me what to put there?)
 * From your terminal run `make up` to start the development server
 * Visit http://localhost:3000/ in any browser
 
 ## Contribute
 ### Setup
 
-After you clone the repo just run:
+After you clone the repo and create the `config/master.key` file just run:
 ```
 % make setup
 ```
