@@ -1,6 +1,8 @@
-<div class="card">
-  <img src="<%= recipe.photo.file.url %>" alt="Avatar" style="width:100%">
-  <div class="container">
-    <h4><b><%= recipe.title %></b></h4>
+<a href="/recipes/<%= recipe.id %>">
+  <div class="card">
+    <img src="<%= recipe.photo_url %>" alt="<%= recipe.title %>" style="width:100%">
+    <div class="container">
+      <h4><b><%= recipe.title %></b></h4>
+    </div>
   </div>
-</div>
+</a>

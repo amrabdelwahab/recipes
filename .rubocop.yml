@@ -12,3 +12,9 @@ Metrics/BlockLength:
 
 AllCops:
   NewCops: enable
+
+RSpec/VerifiedDoubles:
+  Enabled: false
+
+RSpec/ExampleLength:
+  Enabled: false

@@ -1,0 +1,16 @@
+<h1><%= @recipe.title %></h1>
+
+<% if @recipe.chef_name %>
+  <h4>By: <%= @recipe.chef_name %></h4>
+<% end %>
+
+<% if @recipe.tags.any? %>
+  <%= render 'tags', tags: @recipe.tags %>
+<% end %>
+
+<div class="card">
+  <img src="<%= @recipe.photo_url %>" alt="<%= @recipe.title %>" style="width:100%">
+  <div class="container">
+    <p><%= @recipe.description %></p>
+  </div>
+</div>

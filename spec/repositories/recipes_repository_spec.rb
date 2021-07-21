@@ -21,9 +21,12 @@ RSpec.describe RecipesRepository do
 
     context 'when the api client returns valid entries' do
       let(:client) { instance_double(Contentful::Client) }
+      let(:recipe_mapper) { instance_double(RecipeMapper, call: recipe) }
+      let(:recipe) { instance_double(Recipe) }
       let(:raw_entry) do
         double(
           Contentful::Entry,
+          id: 'test-id',
           title: 'test-title',
           photo: 'test-photo'
         )
@@ -41,13 +44,60 @@ RSpec.describe RecipesRepository do
           .to receive(:entries)
           .with(content_type: 'recipe')
           .and_return([raw_entry])
+
+        allow(RecipeMapper)
+          .to receive(:new)
+          .with(contentful_entry: raw_entry)
+          .and_return(recipe_mapper)
       end
 
       it { is_expected.to be_an(Array) }
 
       specify { expect(all.count).to eq 1 }
-      specify { expect(all.first.title).to eq 'test-title' }
-      specify { expect(all.first.photo).to eq 'test-photo' }
+      specify { expect(all.first).to eq recipe }
+    end
+  end
+
+  describe '#find' do
+    subject(:find) { repo.find(id: 'test-id') }
+
+    let(:client) { instance_double(Contentful::Client) }
+    let(:entry) { instance_double(Contentful::Entry) }
+
+    before do
+      allow(Contentful::Client)
+        .to receive(:new)
+        .with(
+          space: 'test_space',
+          access_token: 'test_token'
+        ).and_return(client)
+
+      allow(client)
+        .to receive(:entry)
+        .with('test-id')
+        .and_return(entry)
+    end
+
+    context 'when entry is not found' do
+      let(:entry) { nil }
+
+      it 'raises a record not found exception' do
+        expect { find }.to(raise_error { RecordNotFound })
+      end
+    end
+
+    context 'when entry is found' do
+      let(:mapper) { instance_double(RecipeMapper, call: recipe) }
+      let(:recipe) { instance_double(Recipe) }
+
+      before do
+        allow(RecipeMapper)
+          .to receive(:new)
+          .with(contentful_entry: entry)
+          .and_return(mapper)
+      end
+
+      it { is_expected.to eq recipe }
     end
   end
 end

@@ -3,11 +3,20 @@
 class RecipesRepository
   def all
     contentful_entries.map do |entry|
-      Recipe.new(
-        title: entry.title,
-        photo: entry.photo
-      )
+      RecipeMapper.new(
+        contentful_entry: entry
+      ).call
     end
+  end
+
+  def find(id:)
+    entry = contentful_client.entry(id)
+
+    raise RecordNotFound unless entry
+
+    RecipeMapper.new(
+      contentful_entry: entry
+    ).call
   end
 
   private
