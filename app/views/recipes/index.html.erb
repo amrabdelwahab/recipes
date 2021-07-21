@@ -1,12 +1,5 @@
 <% if @recipes.empty? %>
   <h3> No Recipes available </h3>
 <% else %>
-  <h1>Recipes List</h1>
-
-  <ul>
-  <% @recipes.each do |recipe| %>
-    <li> <%= recipe.title %> </li>
-  <% end %>
-  </ul>
-
+  <%= render 'recipes' %>
 <% end %>

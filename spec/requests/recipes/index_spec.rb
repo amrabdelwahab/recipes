@@ -23,9 +23,11 @@ RSpec.describe 'Recipes list', type: :request do
   end
 
   context 'when the recipes API returns a list of recipes' do
+    let(:photo) { double('contentful-asset', file: file) }
+    let(:file) { double('contentful-file', url: 'url') }
     let(:recipes_response) do
       [
-        instance_double(Recipe, title: 'Test Recipe')
+        instance_double(Recipe, title: 'Test Recipe', photo: photo)
       ]
     end
 
