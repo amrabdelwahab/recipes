@@ -15,7 +15,7 @@ RSpec.describe 'Recipes list', type: :request do
 
   context 'when the recipes API returns an empty list', :aggregate_failures do
     it 'shows no recipes available' do
-      get '/recipes'
+      get ''
 
       expect(response).to be_successful
       expect(response.body).to include('No Recipes available')
@@ -30,7 +30,7 @@ RSpec.describe 'Recipes list', type: :request do
     end
 
     it 'renders a list of recipes', :aggregate_failures do
-      get '/recipes'
+      get ''
 
       expect(response).to be_successful
       expect(response.body).to include('Test Recipe')
