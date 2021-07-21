@@ -10,6 +10,7 @@ gem 'contentful'
 gem 'jbuilder', '~> 2.7'
 gem 'puma', '~> 5.0'
 gem 'rails', '~> 6.1.4'
+gem 'redcarpet'
 gem 'rubocop-rails', require: false
 gem 'rubocop-rspec', require: false
 
